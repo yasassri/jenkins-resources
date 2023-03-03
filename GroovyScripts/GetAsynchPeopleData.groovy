@@ -1,3 +1,5 @@
+# Get information shown in http://localhost:8080/asynchPeople/
+
 import hudson.model.View.UserInfo;
 import hudson.util.RunList;
 import jenkins.scm.RunWithSCM;
@@ -28,10 +30,8 @@ for (Item item : items) {
                         UserInfo userInfo = new UserInfo(user, job, r.getTimestamp());
                         users.put(user, userInfo);
                         modified.add(user);
-                      println "yyy"
 
                     } else if (info.getLastChange().before(r.getTimestamp())) {
-                        println "xxxxx"
                         info.project = job;
                         info.lastChange = r.getTimestamp();
                         modified.add(user);
@@ -45,5 +45,5 @@ for (Item item : items) {
 
 
 users.each { key, val ->
-    println "UserName : " + val.getUser() + " CommitActivity: " + val.getLastChangeTimeString()
+    println "UserName : " + val.getUser() + " ,CommitActivity: " + val.getLastChangeTimeString() + " ,ProjectName: " + val.getJob().getFullDisplayName() + " ,URL: " + val.getJob().getUrl()
 }
